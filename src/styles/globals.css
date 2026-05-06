@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+
 *,
 *::before,
 *::after {
@@ -8,15 +10,322 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: #f5f5f5;
+  font-family: 'Lato', sans-serif;
+  background: linear-gradient(160deg, #fff5f8 0%, #ffeef4 40%, #fde8f0 100%);
+  min-height: 100vh;
 }
 
+/* ── Títulos ── */
+h1, h2, h3, h4, h5,
+.ant-typography h1,
+.ant-typography h2,
+.ant-typography h3,
+.ant-typography h4,
+.ant-typography h5 {
+  font-family: 'Playfair Display', serif !important;
+  color: #d4849a !important;
+}
+
+/* ── Sidebar ── */
+.ant-layout-sider {
+  background: linear-gradient(180deg, #fde8f0 0%, #f9c8d9 50%, #f5b0c8 100%) !important;
+  box-shadow: 3px 0 18px rgba(220, 150, 170, 0.18) !important;
+}
+
+.ant-layout-sider .ant-menu {
+  background: transparent !important;
+}
+
+.ant-layout-sider .ant-menu-item,
+.ant-layout-sider .ant-menu-item a {
+  color: #a05070 !important;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+.ant-layout-sider .ant-menu-item:hover {
+  background: rgba(255, 255, 255, 0.45) !important;
+  border-radius: 14px !important;
+}
+
+.ant-layout-sider .ant-menu-item-selected {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border-radius: 14px !important;
+}
+
+.ant-layout-sider .ant-menu-item-selected a {
+  color: #b05878 !important;
+  font-weight: 700 !important;
+}
+
+.ant-layout-sider-trigger {
+  background: #f5b0c8 !important;
+  color: #a05070 !important;
+}
+
+/* ── Header ── */
+.ant-layout-header {
+  background: linear-gradient(90deg, #fff5f8, #fde8f0) !important;
+  border-bottom: 1.5px solid #f9c8d9 !important;
+  box-shadow: 0 2px 10px rgba(220, 150, 170, 0.12) !important;
+}
+
+/* ── Content ── */
+.ant-layout-content {
+  background: rgba(255, 252, 254, 0.92) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 6px 28px rgba(220, 150, 170, 0.1) !important;
+  border: 1px solid #fde8f0 !important;
+}
+
+/* ── Footer ── */
+.ant-layout-footer {
+  background: transparent !important;
+  color: #d4849a !important;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+/* ── Cards ── */
+.ant-card {
+  border-radius: 18px !important;
+  border: 1px solid #fde8f0 !important;
+  box-shadow: 0 3px 16px rgba(220, 150, 170, 0.08) !important;
+  background: rgba(255, 252, 254, 0.97) !important;
+}
+
+.ant-card-head {
+  background: linear-gradient(90deg, #fff0f5, #fde8f0) !important;
+  border-bottom: 1px solid #f9c8d9 !important;
+  border-radius: 18px 18px 0 0 !important;
+}
+
+.ant-card-head-title {
+  color: #c4748a !important;
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 600 !important;
+}
+
+/* ── Botones primarios ── */
+.ant-btn-primary {
+  background: linear-gradient(135deg, #f5b0c8, #f0a0bc) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.4px !important;
+  box-shadow: 0 3px 12px rgba(220, 150, 170, 0.28) !important;
+  transition: all 0.3s ease !important;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #f0a0bc, #e890b0) !important;
+  box-shadow: 0 5px 18px rgba(220, 150, 170, 0.38) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ── Botones default ── */
+.ant-btn-default {
+  border-color: #f5b0c8 !important;
+  color: #c4748a !important;
+  border-radius: 22px !important;
+  background: #fff8fb !important;
+}
+
+.ant-btn-default:hover {
+  border-color: #f0a0bc !important;
+  color: #b05878 !important;
+  background: #fff0f5 !important;
+}
+
+/* ── Botones danger ── */
+.ant-btn-dangerous {
+  border-radius: 22px !important;
+}
+
+/* ── Tablas ── */
+.ant-table {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+.ant-table-thead > tr > th {
+  background: linear-gradient(90deg, #fff0f5, #fde8f0) !important;
+  color: #c4748a !important;
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 600 !important;
+  border-bottom: 1.5px solid #f9c8d9 !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #fff8fb !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #fde8f0 !important;
+  color: #6b4050 !important;
+}
+
+.ant-table-summary > tr > td {
+  background: #fff0f5 !important;
+}
+
+/* ── Paginación ── */
+.ant-pagination-item-active {
+  background: #f5b0c8 !important;
+  border-color: #f5b0c8 !important;
+  border-radius: 50% !important;
+}
+
+.ant-pagination-item-active a {
+  color: #fff !important;
+}
+
+.ant-pagination-item:hover {
+  border-color: #f9c8d9 !important;
+}
+
+.ant-pagination-item:hover a {
+  color: #c4748a !important;
+}
+
+/* ── Tags ── */
+.ant-tag {
+  border-radius: 22px !important;
+  font-weight: 500 !important;
+}
+
+.ant-tag-green {
+  background: #f0faf0 !important;
+  border-color: #b8e0c0 !important;
+  color: #5a9a6a !important;
+}
+
+.ant-tag-blue {
+  background: #f0f4ff !important;
+  border-color: #c0ccf0 !important;
+  color: #6070b8 !important;
+}
+
+.ant-tag-red {
+  background: #fff0f2 !important;
+  border-color: #f0b8c0 !important;
+  color: #b86070 !important;
+}
+
+/* ── Inputs ── */
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-input-number,
+.ant-input-number-input,
+.ant-picker {
+  border-color: #f9c8d9 !important;
+  border-radius: 12px !important;
+  background: #fffafc !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper-focused,
+.ant-input-number-focused,
+.ant-picker-focused {
+  border-color: #f5b0c8 !important;
+  box-shadow: 0 0 0 2px rgba(245, 176, 200, 0.2) !important;
+}
+
+.ant-input:hover,
+.ant-input-affix-wrapper:hover,
+.ant-input-number:hover,
+.ant-picker:hover {
+  border-color: #f5b0c8 !important;
+}
+
+.ant-form-item-label > label {
+  color: #c4748a !important;
+  font-weight: 600 !important;
+}
+
+/* ── Select ── */
+.ant-select-selector {
+  border-color: #f9c8d9 !important;
+  border-radius: 12px !important;
+  background: #fffafc !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #f5b0c8 !important;
+  box-shadow: 0 0 0 2px rgba(245, 176, 200, 0.2) !important;
+}
+
+/* ── Descriptions ── */
+.ant-descriptions-item-label {
+  background: #fff5f8 !important;
+  color: #c4748a !important;
+  font-weight: 600 !important;
+}
+
+.ant-descriptions-bordered .ant-descriptions-item-label {
+  background: linear-gradient(90deg, #fff0f5, #fde8f0) !important;
+}
+
+.ant-descriptions-bordered .ant-descriptions-item-content {
+  background: #fffcfe !important;
+  color: #6b4050 !important;
+}
+
+/* ── Statistics ── */
+.ant-statistic-title {
+  color: #c4748a !important;
+  font-family: 'Playfair Display', serif !important;
+  font-size: 13px !important;
+  letter-spacing: 0.4px;
+}
+
+.ant-statistic-content {
+  color: #a05070 !important;
+}
+
+/* ── Alerts ── */
+.ant-alert-error {
+  background: #fff5f7 !important;
+  border-color: #f9c8d9 !important;
+}
+
+/* ── Spin ── */
+.ant-spin-dot-item {
+  background-color: #f5b0c8 !important;
+}
+
+/* ── Divider ── */
+.ant-divider {
+  border-color: #fde8f0 !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff5f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f9c8d9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f5b0c8;
+}
+
+/* ── Utilidades ── */
 .page-header {
   margin-bottom: 24px;
 }
 
 .stat-card {
-  border-radius: 8px;
+  border-radius: 18px !important;
+  border-left: 4px solid #f9c8d9 !important;
 }
