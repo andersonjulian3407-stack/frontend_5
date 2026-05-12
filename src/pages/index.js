@@ -71,7 +71,7 @@ export default function Dashboard() {
               title="Total Pedidos"
               value={orders.length}
               prefix={<ShoppingCartOutlined />}
-              valueStyle={{ color: '#1677ff' }}
+              valueStyle={{ color: '#1e40af', fontWeight: 700 }}
             />
           </Card>
         </Col>
@@ -82,7 +82,7 @@ export default function Dashboard() {
               value={totalRevenue}
               precision={2}
               prefix={<DollarOutlined />}
-              valueStyle={{ color: '#52c41a' }}
+              valueStyle={{ color: '#166534', fontWeight: 700 }}
             />
           </Card>
         </Col>
@@ -92,7 +92,7 @@ export default function Dashboard() {
               title="Productos Activos"
               value={uniqueProducts}
               prefix={<CheckCircleOutlined />}
-              valueStyle={{ color: '#faad14' }}
+              valueStyle={{ color: '#0f1c3f', fontWeight: 700 }}
             />
           </Card>
         </Col>
@@ -102,7 +102,7 @@ export default function Dashboard() {
               title="Clientes Únicos"
               value={uniqueCustomers}
               prefix={<ClockCircleOutlined />}
-              valueStyle={{ color: '#722ed1' }}
+              valueStyle={{ color: '#374151', fontWeight: 700 }}
             />
           </Card>
         </Col>

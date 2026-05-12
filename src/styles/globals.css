@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
 
 *,
 *::before,
@@ -10,9 +10,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
-  background: linear-gradient(160deg, #fff5f8 0%, #ffeef4 40%, #fde8f0 100%);
+  font-family: 'Inter', sans-serif;
+  background: #f0f2f5;
   min-height: 100vh;
+  color: #1a2332;
 }
 
 /* ── Títulos ── */
@@ -22,14 +23,16 @@ h1, h2, h3, h4, h5,
 .ant-typography h3,
 .ant-typography h4,
 .ant-typography h5 {
-  font-family: 'Playfair Display', serif !important;
-  color: #d4849a !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #0f1c3f !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.3px !important;
 }
 
 /* ── Sidebar ── */
 .ant-layout-sider {
-  background: linear-gradient(180deg, #fde8f0 0%, #f9c8d9 50%, #f5b0c8 100%) !important;
-  box-shadow: 3px 0 18px rgba(220, 150, 170, 0.18) !important;
+  background: #0f1c3f !important;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.18) !important;
 }
 
 .ant-layout-sider .ant-menu {
@@ -38,144 +41,168 @@ h1, h2, h3, h4, h5,
 
 .ant-layout-sider .ant-menu-item,
 .ant-layout-sider .ant-menu-item a {
-  color: #a05070 !important;
-  font-family: 'Lato', sans-serif;
+  color: #a8b8d8 !important;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
-  letter-spacing: 0.4px;
+  font-size: 13.5px;
+  letter-spacing: 0.2px;
 }
 
 .ant-layout-sider .ant-menu-item:hover {
-  background: rgba(255, 255, 255, 0.45) !important;
-  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+  color: #ffffff !important;
+}
+
+.ant-layout-sider .ant-menu-item:hover a {
+  color: #ffffff !important;
 }
 
 .ant-layout-sider .ant-menu-item-selected {
-  background: rgba(255, 255, 255, 0.55) !important;
-  border-radius: 14px !important;
+  background: rgba(59, 130, 246, 0.18) !important;
+  border-radius: 6px !important;
+  border-left: 3px solid #3b82f6 !important;
 }
 
 .ant-layout-sider .ant-menu-item-selected a {
-  color: #b05878 !important;
-  font-weight: 700 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
 }
 
 .ant-layout-sider-trigger {
-  background: #f5b0c8 !important;
-  color: #a05070 !important;
+  background: #1a2d5a !important;
+  color: #a8b8d8 !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
 }
 
 /* ── Header ── */
 .ant-layout-header {
-  background: linear-gradient(90deg, #fff5f8, #fde8f0) !important;
-  border-bottom: 1.5px solid #f9c8d9 !important;
-  box-shadow: 0 2px 10px rgba(220, 150, 170, 0.12) !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* ── Content ── */
 .ant-layout-content {
-  background: rgba(255, 252, 254, 0.92) !important;
-  border-radius: 22px !important;
-  box-shadow: 0 6px 28px rgba(220, 150, 170, 0.1) !important;
-  border: 1px solid #fde8f0 !important;
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #e2e8f0 !important;
 }
 
 /* ── Footer ── */
 .ant-layout-footer {
   background: transparent !important;
-  color: #d4849a !important;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  color: #94a3b8 !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  letter-spacing: 0.2px;
 }
 
 /* ── Cards ── */
 .ant-card {
-  border-radius: 18px !important;
-  border: 1px solid #fde8f0 !important;
-  box-shadow: 0 3px 16px rgba(220, 150, 170, 0.08) !important;
-  background: rgba(255, 252, 254, 0.97) !important;
+  border-radius: 8px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+  background: #ffffff !important;
+  transition: box-shadow 0.2s ease !important;
+}
+
+.ant-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09) !important;
 }
 
 .ant-card-head {
-  background: linear-gradient(90deg, #fff0f5, #fde8f0) !important;
-  border-bottom: 1px solid #f9c8d9 !important;
-  border-radius: 18px 18px 0 0 !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-radius: 8px 8px 0 0 !important;
 }
 
 .ant-card-head-title {
-  color: #c4748a !important;
-  font-family: 'Playfair Display', serif !important;
+  color: #0f1c3f !important;
+  font-family: 'Inter', sans-serif !important;
   font-weight: 600 !important;
+  font-size: 14px !important;
+  letter-spacing: -0.1px !important;
 }
 
 /* ── Botones primarios ── */
 .ant-btn-primary {
-  background: linear-gradient(135deg, #f5b0c8, #f0a0bc) !important;
+  background: #1e40af !important;
   border: none !important;
-  border-radius: 22px !important;
+  border-radius: 6px !important;
   color: #fff !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.4px !important;
-  box-shadow: 0 3px 12px rgba(220, 150, 170, 0.28) !important;
-  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+  font-family: 'Inter', sans-serif !important;
+  letter-spacing: 0.2px !important;
+  box-shadow: 0 1px 4px rgba(30, 64, 175, 0.3) !important;
+  transition: all 0.2s ease !important;
 }
 
 .ant-btn-primary:hover {
-  background: linear-gradient(135deg, #f0a0bc, #e890b0) !important;
-  box-shadow: 0 5px 18px rgba(220, 150, 170, 0.38) !important;
+  background: #1d4ed8 !important;
+  box-shadow: 0 3px 10px rgba(30, 64, 175, 0.4) !important;
   transform: translateY(-1px) !important;
 }
 
 /* ── Botones default ── */
 .ant-btn-default {
-  border-color: #f5b0c8 !important;
-  color: #c4748a !important;
-  border-radius: 22px !important;
-  background: #fff8fb !important;
+  border-color: #cbd5e1 !important;
+  color: #374151 !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .ant-btn-default:hover {
-  border-color: #f0a0bc !important;
-  color: #b05878 !important;
-  background: #fff0f5 !important;
+  border-color: #94a3b8 !important;
+  color: #0f1c3f !important;
+  background: #f8fafc !important;
 }
 
 /* ── Botones danger ── */
 .ant-btn-dangerous {
-  border-radius: 22px !important;
+  border-radius: 6px !important;
 }
 
 /* ── Tablas ── */
 .ant-table {
-  border-radius: 14px !important;
+  border-radius: 8px !important;
   overflow: hidden !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .ant-table-thead > tr > th {
-  background: linear-gradient(90deg, #fff0f5, #fde8f0) !important;
-  color: #c4748a !important;
-  font-family: 'Playfair Display', serif !important;
+  background: #f8fafc !important;
+  color: #374151 !important;
+  font-family: 'Inter', sans-serif !important;
   font-weight: 600 !important;
-  border-bottom: 1.5px solid #f9c8d9 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  border-bottom: 1.5px solid #e2e8f0 !important;
 }
 
 .ant-table-tbody > tr:hover > td {
-  background: #fff8fb !important;
+  background: #f8fafc !important;
 }
 
 .ant-table-tbody > tr > td {
-  border-bottom: 1px solid #fde8f0 !important;
-  color: #6b4050 !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #1e293b !important;
+  font-size: 13.5px !important;
 }
 
 .ant-table-summary > tr > td {
-  background: #fff0f5 !important;
+  background: #f8fafc !important;
 }
 
 /* ── Paginación ── */
 .ant-pagination-item-active {
-  background: #f5b0c8 !important;
-  border-color: #f5b0c8 !important;
-  border-radius: 50% !important;
+  background: #1e40af !important;
+  border-color: #1e40af !important;
+  border-radius: 6px !important;
 }
 
 .ant-pagination-item-active a {
@@ -183,35 +210,43 @@ h1, h2, h3, h4, h5,
 }
 
 .ant-pagination-item:hover {
-  border-color: #f9c8d9 !important;
+  border-color: #3b82f6 !important;
 }
 
 .ant-pagination-item:hover a {
-  color: #c4748a !important;
+  color: #1e40af !important;
 }
 
 /* ── Tags ── */
 .ant-tag {
-  border-radius: 22px !important;
+  border-radius: 4px !important;
   font-weight: 500 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
 }
 
 .ant-tag-green {
-  background: #f0faf0 !important;
-  border-color: #b8e0c0 !important;
-  color: #5a9a6a !important;
+  background: #f0fdf4 !important;
+  border-color: #86efac !important;
+  color: #166534 !important;
 }
 
 .ant-tag-blue {
-  background: #f0f4ff !important;
-  border-color: #c0ccf0 !important;
-  color: #6070b8 !important;
+  background: #eff6ff !important;
+  border-color: #93c5fd !important;
+  color: #1e40af !important;
 }
 
 .ant-tag-red {
-  background: #fff0f2 !important;
-  border-color: #f0b8c0 !important;
-  color: #b86070 !important;
+  background: #fef2f2 !important;
+  border-color: #fca5a5 !important;
+  color: #991b1b !important;
+}
+
+.ant-tag-orange {
+  background: #fff7ed !important;
+  border-color: #fdba74 !important;
+  color: #9a3412 !important;
 }
 
 /* ── Inputs ── */
@@ -220,85 +255,108 @@ h1, h2, h3, h4, h5,
 .ant-input-number,
 .ant-input-number-input,
 .ant-picker {
-  border-color: #f9c8d9 !important;
-  border-radius: 12px !important;
-  background: #fffafc !important;
+  border-color: #cbd5e1 !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
+  color: #1e293b !important;
 }
 
 .ant-input:focus,
 .ant-input-affix-wrapper-focused,
 .ant-input-number-focused,
 .ant-picker-focused {
-  border-color: #f5b0c8 !important;
-  box-shadow: 0 0 0 2px rgba(245, 176, 200, 0.2) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15) !important;
 }
 
 .ant-input:hover,
 .ant-input-affix-wrapper:hover,
 .ant-input-number:hover,
 .ant-picker:hover {
-  border-color: #f5b0c8 !important;
+  border-color: #94a3b8 !important;
 }
 
 .ant-form-item-label > label {
-  color: #c4748a !important;
-  font-weight: 600 !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
 }
 
 /* ── Select ── */
 .ant-select-selector {
-  border-color: #f9c8d9 !important;
-  border-radius: 12px !important;
-  background: #fffafc !important;
+  border-color: #cbd5e1 !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .ant-select-focused .ant-select-selector {
-  border-color: #f5b0c8 !important;
-  box-shadow: 0 0 0 2px rgba(245, 176, 200, 0.2) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15) !important;
 }
 
 /* ── Descriptions ── */
 .ant-descriptions-item-label {
-  background: #fff5f8 !important;
-  color: #c4748a !important;
+  background: #f8fafc !important;
+  color: #374151 !important;
   font-weight: 600 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
 }
 
 .ant-descriptions-bordered .ant-descriptions-item-label {
-  background: linear-gradient(90deg, #fff0f5, #fde8f0) !important;
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
 }
 
 .ant-descriptions-bordered .ant-descriptions-item-content {
-  background: #fffcfe !important;
-  color: #6b4050 !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 /* ── Statistics ── */
 .ant-statistic-title {
-  color: #c4748a !important;
-  font-family: 'Playfair Display', serif !important;
-  font-size: 13px !important;
-  letter-spacing: 0.4px;
+  color: #64748b !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
 }
 
 .ant-statistic-content {
-  color: #a05070 !important;
+  color: #0f1c3f !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.ant-statistic-content-suffix,
+.ant-statistic-content-prefix {
+  color: #64748b !important;
 }
 
 /* ── Alerts ── */
 .ant-alert-error {
-  background: #fff5f7 !important;
-  border-color: #f9c8d9 !important;
+  background: #fef2f2 !important;
+  border-color: #fca5a5 !important;
+}
+
+.ant-alert-info {
+  background: #eff6ff !important;
+  border-color: #93c5fd !important;
 }
 
 /* ── Spin ── */
 .ant-spin-dot-item {
-  background-color: #f5b0c8 !important;
+  background-color: #1e40af !important;
 }
 
 /* ── Divider ── */
 .ant-divider {
-  border-color: #fde8f0 !important;
+  border-color: #e2e8f0 !important;
 }
 
 /* ── Scrollbar ── */
@@ -308,16 +366,16 @@ h1, h2, h3, h4, h5,
 }
 
 ::-webkit-scrollbar-track {
-  background: #fff5f8;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f9c8d9;
-  border-radius: 10px;
+  background: #cbd5e1;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f5b0c8;
+  background: #94a3b8;
 }
 
 /* ── Utilidades ── */
@@ -326,6 +384,6 @@ h1, h2, h3, h4, h5,
 }
 
 .stat-card {
-  border-radius: 18px !important;
-  border-left: 4px solid #f9c8d9 !important;
+  border-radius: 8px !important;
+  border-left: 3px solid #1e40af !important;
 }

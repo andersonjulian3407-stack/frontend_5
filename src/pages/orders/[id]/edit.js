@@ -113,11 +113,11 @@ export default function EditOrder() {
                   <Card
                     key={key}
                     size="small"
-                    style={{ marginBottom: 12, background: '#fafafa' }}
+                    style={{ marginBottom: 12, background: '#f8fafc', border: '1px solid #e2e8f0' }}
                     extra={
                       fields.length > 1 && (
                         <MinusCircleOutlined
-                          style={{ color: 'red' }}
+                          style={{ color: '#dc2626', cursor: 'pointer' }}
                           onClick={() => remove(name)}
                         />
                       )

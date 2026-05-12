@@ -5,7 +5,7 @@ import {
   UnorderedListOutlined,
   PlusCircleOutlined,
   ShopOutlined,
-  HeartOutlined,
+  AlertOutlined,
 } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -18,7 +18,7 @@ const menuItems = [
   { key: '/orders',     icon: <UnorderedListOutlined />, label: <Link href="/orders">Pedidos</Link> },
   { key: '/orders/new', icon: <PlusCircleOutlined />,   label: <Link href="/orders/new">Nuevo Pedido</Link> },
   { key: '/products',   icon: <ShopOutlined />,         label: <Link href="/products">Productos</Link> },
-  { key: '/health',     icon: <HeartOutlined />,        label: <Link href="/health">Estado del Sistema</Link> },
+  { key: '/health',     icon: <AlertOutlined />,        label: <Link href="/health">Estado del Sistema</Link> },
 ];
 
 export default function AppLayout({ children }) {
@@ -41,29 +41,40 @@ export default function AppLayout({ children }) {
           left: 0,
           top: 0,
           zIndex: 100,
-          background: 'linear-gradient(180deg, #fde8f0 0%, #f9c8d9 55%, #f5b0c8 100%)',
-          boxShadow: '3px 0 18px rgba(220,150,170,0.15)',
+          background: '#0f1c3f',
+          boxShadow: '2px 0 12px rgba(0,0,0,0.18)',
         }}
       >
-        {/* Logo */}
+        {/* Logo / Branding */}
         <div style={{
           height: 64,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          borderBottom: '1px solid rgba(255,255,255,0.5)',
-          padding: '8px 0',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          padding: '8px 16px',
+          gap: 4,
         }}>
-          <span style={{ fontSize: collapsed || isMobile ? 22 : 24 }}>🌸</span>
+          <div style={{
+            width: collapsed || isMobile ? 32 : 32,
+            height: 32,
+            background: 'linear-gradient(135deg, #3b82f6, #1e40af)',
+            borderRadius: 6,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <ShopOutlined style={{ color: '#ffffff', fontSize: 16 }} />
+          </div>
           {!collapsed && !isMobile && (
             <span style={{
-              color: '#a05070',
-              fontFamily: "'Playfair Display', serif",
+              color: '#ffffff',
+              fontFamily: "'Inter', sans-serif",
               fontWeight: 700,
-              fontSize: 14,
-              letterSpacing: 1,
-              marginTop: 2,
+              fontSize: 13,
+              letterSpacing: 0.8,
+              textTransform: 'uppercase',
             }}>
               Orders
             </span>
@@ -81,62 +92,63 @@ export default function AppLayout({ children }) {
             border: 'none',
           }}
         />
-
-        {!collapsed && !isMobile && (
-          <div style={{
-            position: 'absolute',
-            bottom: 64,
-            left: 0,
-            right: 0,
-            textAlign: 'center',
-            fontSize: 16,
-            letterSpacing: 6,
-            opacity: 0.5,
-          }}>
-            🎀
-          </div>
-        )}
       </Sider>
 
       <Layout style={{
         marginLeft: isMobile ? 0 : collapsed ? 80 : 200,
         transition: 'margin-left 0.2s',
-        background: 'linear-gradient(160deg, #fff5f8 0%, #ffeef4 40%, #fde8f0 100%)',
+        background: '#f0f2f5',
         minHeight: '100vh',
       }}>
         {/* Header */}
         <Header style={{
-          background: 'linear-gradient(90deg, #fff8fb, #fde8f0)',
+          background: '#ffffff',
           padding: '0 28px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          boxShadow: '0 2px 10px rgba(220,150,170,0.1)',
-          borderBottom: '1.5px solid #f9c8d9',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+          borderBottom: '1px solid #e2e8f0',
           position: 'sticky',
           top: 0,
           zIndex: 99,
         }}>
-          <Typography.Title level={4} style={{
+          <Typography.Title level={5} style={{
             margin: 0,
-            fontFamily: "'Playfair Display', serif",
-            color: '#c4748a',
-            letterSpacing: 0.5,
+            fontFamily: "'Inter', sans-serif",
+            color: '#0f1c3f',
+            letterSpacing: -0.3,
             fontWeight: 600,
           }}>
-            🎀 Orders Management
+            Sistema de Gestión de Pedidos
           </Typography.Title>
-          <span style={{ fontSize: 18, opacity: 0.6 }}>🌷</span>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            fontSize: 12,
+            color: '#64748b',
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 500,
+          }}>
+            <div style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              background: '#22c55e',
+            }} />
+            En línea
+          </div>
         </Header>
 
         {/* Content */}
         <Content style={{
           margin: '24px 20px',
           padding: 28,
-          background: 'rgba(255, 252, 254, 0.92)',
-          borderRadius: 22,
-          boxShadow: '0 6px 28px rgba(220,150,170,0.09)',
-          border: '1px solid #fde8f0',
+          background: '#ffffff',
+          borderRadius: 8,
+          boxShadow: '0 1px 6px rgba(0,0,0,0.06)',
+          border: '1px solid #e2e8f0',
           minHeight: 360,
         }}>
           {children}
@@ -146,13 +158,12 @@ export default function AppLayout({ children }) {
         <Footer style={{
           textAlign: 'center',
           background: 'transparent',
-          color: '#d4a0b0',
-          fontFamily: "'Playfair Display', serif",
-          fontStyle: 'italic',
-          fontSize: 13,
+          color: '#94a3b8',
+          fontFamily: "'Inter', sans-serif",
+          fontSize: 12,
           paddingTop: 8,
         }}>
-          🌸 Orders Management ©{new Date().getFullYear()} 🌸
+          Orders Management System © {new Date().getFullYear()} — Todos los derechos reservados
         </Footer>
       </Layout>
     </Layout>
