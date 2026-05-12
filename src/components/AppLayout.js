@@ -6,6 +6,7 @@ import {
   PlusCircleOutlined,
   ShopOutlined,
   AlertOutlined,
+  TeamOutlined,
 } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -18,6 +19,7 @@ const menuItems = [
   { key: '/orders',     icon: <UnorderedListOutlined />, label: <Link href="/orders">Pedidos</Link> },
   { key: '/orders/new', icon: <PlusCircleOutlined />,   label: <Link href="/orders/new">Nuevo Pedido</Link> },
   { key: '/products',   icon: <ShopOutlined />,         label: <Link href="/products">Productos</Link> },
+  { key: '/suppliers',  icon: <TeamOutlined />,          label: <Link href="/suppliers">Proveedores</Link> },
   { key: '/health',     icon: <AlertOutlined />,        label: <Link href="/health">Estado del Sistema</Link> },
 ];
 

@@ -1,59 +1,58 @@
-/**
- * Gestión de Productos
- *
- * La API actual no tiene endpoints dedicados para productos, pero los productos
- * viven dentro de los pedidos. Esta pantalla extrae todos los productos únicos
- * de los pedidos existentes y permite ver su estado (discontinuado o no).
- *
- * Para un CRUD completo de productos se necesitaría extender la API con
- * endpoints /api/v1/products — esta pantalla está preparada para eso.
- */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
-  Table, Tag, Typography, Spin, Alert, Input, Row, Col,
-  Button, Tooltip, Badge, Card,
+  Table, Button, Tag, Typography, Input, Row, Col,
+  Popconfirm, message, Card, Badge, Tooltip, Space, Switch,
 } from 'antd';
-import { SearchOutlined, ReloadOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined, SearchOutlined, EditOutlined,
+  DeleteOutlined, ReloadOutlined, ShopOutlined,
+} from '@ant-design/icons';
+import { useRouter } from 'next/router';
 import { getOrders } from '../../lib/apiClient';
+import {
+  getProducts, deleteProduct, seedFromOrders,
+  getSuppliers,
+} from '../../lib/localDb';
 
 const { Title } = Typography;
 
-export default function Products() {
+export default function ProductsPage() {
+  const router = useRouter();
   const [products, setProducts] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const fetchProducts = () => {
+  const load = useCallback(() => {
     setLoading(true);
-    getOrders({ page: 1, limit: 100 })
-      .then((data) => {
-        // Extraer productos únicos de todos los pedidos
-        const map = new Map();
-        (data.rows || []).forEach((order) => {
-          (order.items || []).forEach((item) => {
-            const p = item.product;
-            if (p && !map.has(p.id)) {
-              map.set(p.id, {
-                ...p,
-                supplier: p.supplier,
-                ordersCount: 1,
-              });
-            } else if (p && map.has(p.id)) {
-              map.get(p.id).ordersCount += 1;
-            }
-          });
-        });
-        const list = Array.from(map.values());
-        setProducts(list);
-        setFiltered(list);
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
-  };
+    // Si ya hay productos locales, cargar directo; si no, sembrar desde API
+    const local = getProducts();
+    if (local.length > 0) {
+      const sups = getSuppliers();
+      setProducts(local);
+      setFiltered(local);
+      setSuppliers(sups);
+      setLoading(false);
+    } else {
+      getOrders({ page: 1, limit: 200 })
+        .then((data) => {
+          seedFromOrders(data.rows || []);
+          const seeded = getProducts();
+          const sups = getSuppliers();
+          setProducts(seeded);
+          setFiltered(seeded);
+          setSuppliers(sups);
+        })
+        .catch(() => {
+          setProducts([]);
+          setFiltered([]);
+        })
+        .finally(() => setLoading(false));
+    }
+  }, []);
 
-  useEffect(() => { fetchProducts(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   useEffect(() => {
     if (!search) {
@@ -64,28 +63,56 @@ export default function Products() {
         products.filter(
           (p) =>
             p.productName?.toLowerCase().includes(q) ||
-            p.supplier?.companyName?.toLowerCase().includes(q)
+            String(p.id).includes(q)
         )
       );
     }
   }, [search, products]);
 
+  const supplierName = (supplierId) => {
+    const s = suppliers.find((s) => s.id === supplierId);
+    return s?.companyName || '—';
+  };
+
+  const handleDelete = (id) => {
+    deleteProduct(id);
+    message.success('Producto eliminado');
+    load();
+  };
+
   const columns = [
-    { title: 'ID', dataIndex: 'id', key: 'id', width: 60, sorter: (a, b) => a.id - b.id },
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+      width: 60,
+      sorter: (a, b) => a.id - b.id,
+    },
     {
       title: 'Producto',
       dataIndex: 'productName',
       key: 'productName',
-      sorter: (a, b) => a.productName.localeCompare(b.productName),
+      sorter: (a, b) => a.productName?.localeCompare(b.productName),
     },
     {
       title: 'Precio Unit.',
       dataIndex: 'unitPrice',
       key: 'unitPrice',
-      render: (v) => `$${Number(v).toFixed(2)}`,
-      sorter: (a, b) => a.unitPrice - b.unitPrice,
+      render: (v) => `$${Number(v || 0).toFixed(2)}`,
+      sorter: (a, b) => (a.unitPrice || 0) - (b.unitPrice || 0),
     },
-    { title: 'Presentación', dataIndex: 'package', key: 'package' },
+    {
+      title: 'Presentación',
+      dataIndex: 'package',
+      key: 'package',
+      render: (v) => v || '—',
+    },
+    {
+      title: 'Proveedor',
+      dataIndex: 'supplierId',
+      key: 'supplierId',
+      render: (v) => supplierName(v),
+    },
     {
       title: 'Estado',
       dataIndex: 'isDiscontinued',
@@ -103,45 +130,70 @@ export default function Products() {
       onFilter: (value, record) => record.isDiscontinued === value,
     },
     {
-      title: 'Proveedor',
-      key: 'supplier',
-      render: (_, r) => r.supplier?.companyName ?? '—',
-    },
-    {
-      title: 'País Proveedor',
-      key: 'country',
-      render: (_, r) => r.supplier?.country ?? '—',
-    },
-    {
-      title: 'Aparece en Pedidos',
-      dataIndex: 'ordersCount',
-      key: 'ordersCount',
-      render: (v) => <Tag color="blue">{v}</Tag>,
-      sorter: (a, b) => a.ordersCount - b.ordersCount,
+      title: 'Acciones',
+      key: 'actions',
+      fixed: 'right',
+      width: 110,
+      render: (_, r) => (
+        <Space>
+          <Tooltip title="Editar">
+            <Button
+              size="small"
+              icon={<EditOutlined />}
+              onClick={() => router.push(`/products/${r.id}/edit`)}
+            />
+          </Tooltip>
+          <Tooltip title="Eliminar">
+            <Popconfirm
+              title="¿Eliminar este producto?"
+              onConfirm={() => handleDelete(r.id)}
+              okText="Sí"
+              cancelText="No"
+            >
+              <Button size="small" danger icon={<DeleteOutlined />} />
+            </Popconfirm>
+          </Tooltip>
+        </Space>
+      ),
     },
   ];
-
-  if (loading) return <Spin size="large" style={{ display: 'block', margin: '80px auto' }} />;
-  if (error) return <Alert type="error" message={error} showIcon />;
 
   return (
     <>
       <Row justify="space-between" align="middle" className="page-header">
         <Col>
-          <Title level={3} style={{ margin: 0 }}>Gestión de Productos</Title>
+          <Title level={3} style={{ margin: 0 }}>
+            <ShopOutlined style={{ marginRight: 10, color: '#1e40af' }} />
+            Gestión de Productos
+          </Title>
         </Col>
         <Col>
-          <Tooltip title="Recargar">
-            <Button icon={<ReloadOutlined />} onClick={fetchProducts} />
-          </Tooltip>
+          <Space>
+            <Tooltip title="Recargar datos desde API">
+              <Button
+                icon={<ReloadOutlined />}
+                onClick={() => {
+                  localStorage.removeItem('db_products');
+                  load();
+                }}
+              />
+            </Tooltip>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => router.push('/products/new')}
+            >
+              Nuevo Producto
+            </Button>
+          </Space>
         </Col>
       </Row>
 
       <Card style={{ marginBottom: 16 }}>
-        <Row gutter={12}>
+        <Row gutter={12} align="middle">
           <Col xs={24} sm={12} md={8}>
             <Input
-              placeholder="Buscar por nombre o proveedor"
+              placeholder="Buscar por nombre o ID"
               prefix={<SearchOutlined />}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -149,13 +201,15 @@ export default function Products() {
             />
           </Col>
           <Col>
-            <Tag color="blue">{filtered.length} producto(s)</Tag>
-            <Tag color="green">
-              {filtered.filter((p) => !p.isDiscontinued).length} activos
-            </Tag>
-            <Tag color="red">
-              {filtered.filter((p) => p.isDiscontinued).length} discontinuados
-            </Tag>
+            <Space>
+              <Tag color="blue">{filtered.length} producto(s)</Tag>
+              <Tag color="green">
+                {filtered.filter((p) => !p.isDiscontinued).length} activos
+              </Tag>
+              <Tag color="red">
+                {filtered.filter((p) => p.isDiscontinued).length} discontinuados
+              </Tag>
+            </Space>
           </Col>
         </Row>
       </Card>
@@ -164,10 +218,17 @@ export default function Products() {
         dataSource={filtered}
         columns={columns}
         rowKey="id"
+        loading={loading}
         scroll={{ x: 900 }}
-        rowClassName={(r) => (r.isDiscontinued ? 'ant-table-row-disabled' : '')}
         pagination={{ pageSize: 10, showTotal: (t) => `${t} productos` }}
+        rowClassName={(r) => (r.isDiscontinued ? 'discontinued-row' : '')}
       />
+
+      <style jsx global>{`
+        .discontinued-row td {
+          opacity: 0.55;
+        }
+      `}</style>
     </>
   );
 }
